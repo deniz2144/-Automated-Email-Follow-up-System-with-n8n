@@ -1,0 +1,593 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        16,
+        -144
+      ],
+      "id": "faf59e75-7105-42b1-b2b7-948f0ee407c4",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1J6xqoK5a2_hoe8G4d1U9tvlYjOvjTaOVDSFkHtFYeqg/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sayfa1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1J6xqoK5a2_hoe8G4d1U9tvlYjOvjTaOVDSFkHtFYeqg/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        144,
+        64
+      ],
+      "id": "430e067b-4f38-4bb7-a182-1c0c12332a0c",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Om9PonllVOhAXQOp",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4cf69c72-40eb-4ad8-aa5b-e7f01f06323e",
+              "leftValue": "={{$json[\"grup\"]}}",
+              "rightValue": "deneme",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1232,
+        -80
+      ],
+      "id": "ac3ae211-e8ff-4357-a96a-59b999adfe59",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{$json[\"email\"]}}",
+        "subject": "Deneme Grubuna Özel",
+        "message": "=<p>Merhaba {{$json[\"ad\"]}},</p>\n<p>Deneme grubuna hoş geldiniz!</p>\n<img src=\"https://denizsoft.app.n8n.cloud/webhook-test/e2c19b68-8749-47cd-99ba-a65b3cc3a167?email={{$json[\"email\"]}}&mail_template=deneme\" width=\"1\" height=\"1\" style=\"display:none;\" alt=\"\" />\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1456,
+        -96
+      ],
+      "id": "50db7254-ad8a-4936-bdf3-66cd6e63854f",
+      "name": "Send a message1",
+      "webhookId": "d16f203e-dc61-4838-823b-5bf45cfa2461",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "cx2ldBIkWyFl6wOC",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b843b783-4cf7-42d0-847c-f176048f9653",
+              "leftValue": "={{$json[\"grup\"]}}",
+              "rightValue": "form",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1456,
+        96
+      ],
+      "id": "85521b35-a250-46c9-9823-fbf24492cb32",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{$json[\"email\"]}}",
+        "subject": "Form Grubu",
+        "message": "=<p>Merhaba {{$json[\"ad\"]}},</p>\n<p>Formunuzu aldık, teşekkürler!</p>\n<img src=\"https://denizsoft.app.n8n.cloud/webhook-test/e2c19b68-8749-47cd-99ba-a65b3cc3a167?email={{$json[\"email\"]}}&mail_template=form\" width=\"1\" height=\"1\" style=\"display:none;\" alt=\"\" />\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1664,
+        0
+      ],
+      "id": "b2e517f6-a94b-406d-aba2-87bffec07721",
+      "name": "Send a message2",
+      "webhookId": "1a206df8-2bac-46ba-84e8-783721b0823d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "cx2ldBIkWyFl6wOC",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "72813524-296b-4039-b0fc-11e0ce8e042d",
+              "leftValue": "={{$json[\"grup\"]}}",
+              "rightValue": "deneme_aldi_satin_almadi",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1664,
+        192
+      ],
+      "id": "bc0070eb-d192-4082-8c02-337c449de14c",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{$json[\"email\"]}}",
+        "subject": "Deneme aldı ama satın almadı”",
+        "message": "=<p>Merhaba {{$json[\"ad\"]}},</p>\n<p>Deneme dersi aldınız ama henüz satın alma işlemi yapmadınız. Yardımcı olabilir miyiz?</p>\n<img src=\"https://denizsoft.app.n8n.cloud/webhook-test/e2c19b68-8749-47cd-99ba-a65b3cc3a167?email={{$json[\"email\"]}}&mail_template=satin_alma\" width=\"1\" height=\"1\" style=\"display:none;\" alt=\"\" />\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1872,
+        96
+      ],
+      "id": "857e8168-ed26-496c-a350-496f8fd3f04f",
+      "name": "Send a message3",
+      "webhookId": "609dd7fa-a54e-4277-aef5-e3b51fb54c98",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "cx2ldBIkWyFl6wOC",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  const today = new Date();\n  const firstContact = new Date(item.json[\"ilk_gorusme_tarihi\"]);\n  const diffTime = today - firstContact;\n  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));\n  item.json.days_since_first_contact = diffDays;\n  return item;\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        320,
+        -96
+      ],
+      "id": "240e111d-9158-4430-9f00-17382f96e208",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5b62817c-5fcb-4a08-8c66-71fcdca7f981",
+              "leftValue": "={{$json[\"days_since_first_contact\"]}}",
+              "rightValue": "2",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        976,
+        -80
+      ],
+      "id": "09c25ba1-3b2c-495a-ae34-c8acb2e0174a",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "31b66d83-8e6b-49bf-9ede-325d7d49ce55",
+              "leftValue": "={{$json[\"days_since_first_contact\"]}}",
+              "rightValue": "-5",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        528,
+        0
+      ],
+      "id": "d162cafb-2000-4892-9ea0-bf35c6ddd374",
+      "name": "If4"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "83954945-b916-4847-82f1-e0e5b16b5b78",
+              "leftValue": "={{$json[\"grup\"]}}",
+              "rightValue": "deneme",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        768,
+        -48
+      ],
+      "id": "00a7573c-2fbb-4412-9c09-0686ca1c415d",
+      "name": "If5"
+    },
+    {
+      "parameters": {
+        "path": "e2c19b68-8749-47cd-99ba-a65b3cc3a167",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        1872,
+        -144
+      ],
+      "id": "82e2c96c-b06f-4b9c-bec7-5b809d1a4aae",
+      "name": "Webhook",
+      "webhookId": "e2c19b68-8749-47cd-99ba-a65b3cc3a167"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1J6xqoK5a2_hoe8G4d1U9tvlYjOvjTaOVDSFkHtFYeqg",
+          "mode": "list",
+          "cachedResultName": "Başlıksız e-tablo",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1J6xqoK5a2_hoe8G4d1U9tvlYjOvjTaOVDSFkHtFYeqg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sayfa1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1J6xqoK5a2_hoe8G4d1U9tvlYjOvjTaOVDSFkHtFYeqg/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "{{$json[\"query\"][\"email\"]}}",
+            "ad": "{{$json[\"query\"][\"ad\"]",
+            "grup": "{{$json[\"query\"][\"mail_template\"]",
+            "\tilk_gorusme_tarih": "{{new Date().toLocaleDateString(\"tr-TR\")}}",
+            " mail1_log ": "{{new Date().toLocaleString(\"tr-TR\")}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ad",
+              "displayName": "ad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "grup",
+              "displayName": "grup",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "\tilk_gorusme_tarih",
+              "displayName": "\tilk_gorusme_tarih",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": " mail1_log ",
+              "displayName": " mail1_log ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        2080,
+        -144
+      ],
+      "id": "c3eafafd-7f81-4766-9849-775bef130b41",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Om9PonllVOhAXQOp",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Send a message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "If4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message1": {
+      "main": [
+        []
+      ]
+    },
+    "If4": {
+      "main": [
+        [
+          {
+            "node": "If5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If5": {
+      "main": [
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "b9f41902-8fb3-417b-a072-dfee103c92d5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b58b7b19ab296ad13e5ed64ecab52282d7881504cfbc5d1c4a783708095c0788"
+  },
+  "id": "1kQMS5WD6ObQHQVN",
+  "tags": []
+}
