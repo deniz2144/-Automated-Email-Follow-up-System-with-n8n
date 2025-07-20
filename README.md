@@ -18,4 +18,8 @@ To solve this, I built a lightweight email automation workflow using the free ve
 
 ## 📌 Workflow Diagram
 
-![Workflow Screenshot](Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202025-07-19%20191241.png)
+<img width="1633" height="638" alt="Ekran görüntüsü 2025-07-19 191241" src="https://github.com/user-attachments/assets/a01c495a-f806-4f81-ab64-bc230d3f8f41" />
+
+---
+
+
